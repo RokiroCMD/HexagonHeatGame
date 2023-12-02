@@ -15,13 +15,10 @@ public class FrmGame extends JFrame {
     GamePanel gpanel;
     
     public FrmGame() {
-        screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-        screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         this.setUndecorated(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setLocation(this.getLocation().x - screenWidth /2, this.getLocation().y - screenHeight/2);
-        this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Dimension d = new Dimension(screenWidth, screenHeight);
         this.setSize(d);
