@@ -34,11 +34,13 @@ public class HexagonManager {
         hexagonColors = new ArrayList<>();
         //createGrid();
     }
+    
+    public void reset(){
+        removingHexagons = new ArrayList<>();
+    }
 
     public void update() {
-        /*if (!hexagons.isEmpty()) {    
-            hexagons.get(0).shrinkPolygon(0.005);
-        }*/
+
         removeStoredHexagons();
     }
 
@@ -74,21 +76,32 @@ public class HexagonManager {
         actualYGrid = yOffset;
         actualXGrid = xOffset;
         for (int i = 1; i <= gridSize; i++) {
-            hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset, width)));
+            Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset, width));
+            hexagons.add(newHexagon);
+            newHexagon.setX(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2));
+            newHexagon.setY(yOffset);
         }
         for (int i = 0; i <= gridSize; i++) {
             if (i == 1) {
-                hexagons.add(new Hexagon(Color.WHITE, createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width)));
+                Hexagon newHexagon = new Hexagon(Color.WHITE, createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width));
+                hexagons.add(newHexagon);
+                newHexagon.setX(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2));
+                newHexagon.setY(yOffset + ((hexagonHeight * (width)) - (2 * width)));
             } else {
-                hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width)));
+                Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width));
+                hexagons.add(newHexagon);
+                newHexagon.setX(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2));
+                newHexagon.setX(yOffset + ((hexagonHeight * (width)) - (2 * width)));
 
             }
         }
         for (int i = 1; i <= gridSize; i++) {
-            hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset + (((hexagonHeight * width) - (2 * width)) * 2), width)));
+            Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset + (((hexagonHeight * width) - (2 * width)) * 2), width));
+            hexagons.add(newHexagon);
+            newHexagon.setX(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2));
+            newHexagon.setY(yOffset + (((hexagonHeight * width) - (2 * width)) * 2));
         }
 
-        //hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * 4) - ((hexagonWidth * width) / 2), yOffset, width)));
         SpritesManager.setHexagonos(hexagons);
     }
 
@@ -102,21 +115,32 @@ public class HexagonManager {
         actualXGrid = xOffset;
 
         for (int i = 1; i <= gridSize; i++) {
-            hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset, width)));
+            Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset, width));
+            hexagons.add(newHexagon);
+            newHexagon.setX(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2));
+            newHexagon.setY(yOffset);
         }
         for (int i = 0; i <= gridSize; i++) {
             if (i == 1) {
-                hexagons.add(new Hexagon(Color.WHITE, createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width)));
+                Hexagon newHexagon = new Hexagon(Color.WHITE, createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width));
+                hexagons.add(newHexagon);
+                newHexagon.setX(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2));
+                newHexagon.setY(yOffset + ((hexagonHeight * (width)) - (2 * width)));
             } else {
-                hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width)));
+                Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width));
+                hexagons.add(newHexagon);
+                newHexagon.setX(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2));
+                newHexagon.setX(yOffset + ((hexagonHeight * (width)) - (2 * width)));
 
             }
         }
         for (int i = 1; i <= gridSize; i++) {
-            hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset + (((hexagonHeight * width) - (2 * width)) * 2), width)));
+            Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset + (((hexagonHeight * width) - (2 * width)) * 2), width));
+            hexagons.add(newHexagon);
+            newHexagon.setX(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2));
+            newHexagon.setY(yOffset + (((hexagonHeight * width) - (2 * width)) * 2));
         }
 
-        //hexagons.add(new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * 4) - ((hexagonWidth * width) / 2), yOffset, width)));
         SpritesManager.setHexagonos(hexagons);
     }
 
@@ -156,7 +180,41 @@ public class HexagonManager {
     }
 
     public boolean isInCenterOfScreen() {
-          return  actualYGrid >= (gp.frmGame.screenHeight / 2) - (gridHeight / 2);
+        return actualYGrid >= (gp.frmGame.screenHeight / 2) - (gridHeight / 2);
+    }
+
+    private void forcedRemove(Hexagon hexagon) {
+        removingHexagons.add(hexagon);
+        if (removingHexagons.isEmpty()) {
+            return;
+        }
+
+        while (!removingHexagons.isEmpty()) {
+            Hexagon removedHexagon = null;
+
+            for (Hexagon h : hexagons) {
+                if (removingHexagons.contains(h)) {
+                    removedHexagon = h;
+                    break;
+                }
+            }
+            try {
+                if (hexagonColors.contains(removedHexagon.getColor())) {
+                    hexagonColors.remove(removedHexagon.getColor());
+                }
+                if (hexagons.contains(removedHexagon)) {
+                    hexagons.remove(removedHexagon);
+                }
+                if (droppingHexagons.contains(removedHexagon)) {
+                    droppingHexagons.remove(removedHexagon);
+                }
+                if (removingHexagons.contains(removedHexagon)) {
+                    removingHexagons.remove(removedHexagon);
+                }
+            } catch (Exception e) {
+            }
+
+        }
     }
 
     private void removeStoredHexagons() {
@@ -175,6 +233,10 @@ public class HexagonManager {
                 }
             }
             try {
+                
+                if (hexagonColors.contains(removedHexagon.getColor())) {
+                    hexagonColors.remove(removedHexagon.getColor());
+                }
                 if (hexagons.contains(removedHexagon)) {
                     hexagons.remove(removedHexagon);
                 }
@@ -184,6 +246,7 @@ public class HexagonManager {
                 if (removingHexagons.contains(removedHexagon)) {
                     removingHexagons.remove(removedHexagon);
                 }
+                
             } catch (Exception e) {
             }
 
@@ -197,6 +260,58 @@ public class HexagonManager {
         for (Hexagon h : hexagons) {
             h.translatePolygon(x, y);
         }
+    }
+
+    void dropHexagons(Color selectedColor) {
+        for (Hexagon h : hexagons) {
+            if (!h.getColor().equals(selectedColor)) {
+                h.shrinkPolygon(0.00005);
+            } else {
+
+            }
+        }
+    }
+
+    public void regenerateHexgons() {
+
+        forcedRemove(hexagons.get(0));
+
+        gridWidht = (gridSize + 1) * (width * hexagonWidth);
+        gridHeight = (gridSize + 1) * (width * hexagonHeight);
+
+        xOffset = (gp.frmGame.screenWidth / 2) - (gridWidht / 2);
+        yOffset = (gp.frmGame.screenHeight / 2) - (gridHeight / 2);
+
+        actualYGrid = yOffset;
+        actualXGrid = xOffset;
+        
+        for (int i = 1; i <= gridSize; i++) {
+            Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset, width));
+            hexagons.add(newHexagon);
+        }
+        for (int i = 0; i <= gridSize; i++) {
+            if (i == 1) {
+                Hexagon newHexagon = new Hexagon(pickColor(Color.WHITE), createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width));
+                hexagons.add(newHexagon);
+                newHexagon.setX(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2));
+                newHexagon.setY(yOffset + ((hexagonHeight * (width)) - (2 * width)));
+            } else {
+                Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + ((hexagonWidth / 2) * width) + (hexagonWidth * width * i) - (hexagonWidth * width / 2), yOffset + ((hexagonHeight * (width)) - (2 * width)), width));
+                hexagons.add(newHexagon);
+
+            }
+        }
+        for (int i = 1; i <= gridSize; i++) {
+            Hexagon newHexagon = new Hexagon(pickRandomColor(), createPolygon(xOffset + (hexagonWidth * width * i) - ((hexagonWidth * width) / 2), yOffset + (((hexagonHeight * width) - (2 * width)) * 2), width));
+            hexagons.add(newHexagon);
+        }
+
+        SpritesManager.setHexagonos(hexagons);
+    }
+
+    private Color pickColor(Color WHITE) {
+        hexagonColors.add(WHITE);
+        return WHITE;
     }
 
 }

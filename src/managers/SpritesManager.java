@@ -21,6 +21,11 @@ public class SpritesManager {
         SpritesManager.hexagons = hexagonos;
     }
     
+    public void reset(){
+        sprites = new ArrayList<>();
+        hexagons = new ArrayList<>();
+    }
+    
     
     
     public void draw(Graphics2D g2) {

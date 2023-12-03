@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import managers.PlayerManager;
 import utils.PlayerState;
+import utils.Sounds;
 import utils.SpriteSheet;
 import utils.Sprites;
 
@@ -18,7 +19,7 @@ public class Player {
     SpriteSheet sprite;
     int width;
     int height;
-    int numPlayer;
+    public int numPlayer;
     public boolean upKey = false;
     public boolean downKey = false;
     public boolean leftKey = false;
@@ -40,6 +41,21 @@ public class Player {
     
     GamePanel gp;
     public PlayerState playerState = PlayerState.ALIVE;
+    
+    public String getName(){
+        switch (numPlayer) {
+            case 1:
+                return "MARIO";
+            case 2:
+                return "PEACH";
+            case 3:
+                return "MALLOW";
+            case 4:
+                return "GENO";
+                
+        }
+        return "NADIE";
+    }
 
     public Player(GamePanel gp, int x, int y) {
         this.gp = gp;
@@ -82,6 +98,7 @@ public class Player {
 
         }
         sprite = new SpriteSheet(10, DOWN_PLAYER_FRAME, x, y, 2);
+        PlayerManager.alive_players.add(this);
         PlayerManager.players.add(this);
     }
 
@@ -213,8 +230,9 @@ public class Player {
                     sprite.layer = 1;
 
                     floatAnimation = true;
+                    gp.playerManager.removeAlivePlayer(this);
+                    Sounds.reproduceOnce(Sounds.PLAYER_FALL_SOUND);
                 }
-                
                 
                 sprite.x = x;
                 sprite.y += 1;

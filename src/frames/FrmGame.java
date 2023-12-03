@@ -11,10 +11,10 @@ public class FrmGame extends JFrame {
 
     public int screenWidth = 900;
     public int screenHeight = 600;
-    
+    int numJugadoes;
     GamePanel gpanel;
     
-    public FrmGame() {
+    public FrmGame(int numJugadores) {
         this.setUndecorated(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -22,10 +22,10 @@ public class FrmGame extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Dimension d = new Dimension(screenWidth, screenHeight);
         this.setSize(d);
-        
-        gpanel = new GamePanel(this);
+        this.numJugadoes = numJugadores;
+        gpanel = new GamePanel(this, numJugadores);
         this.add(gpanel);
-        
+        this.requestFocus();
         this.setExtendedState(MAXIMIZED_BOTH);
         
     }

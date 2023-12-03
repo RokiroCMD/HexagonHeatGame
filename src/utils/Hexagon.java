@@ -2,7 +2,6 @@ package utils;
 
 import java.awt.Color;
 import java.awt.Polygon;
-import java.awt.Shape;
 import java.awt.image.BufferedImage;
 import managers.HexagonManager;
 
@@ -13,6 +12,8 @@ public class Hexagon {
     Polygon polygon;
     Polygon shadowPolygon;
     BufferedImage texture;
+    int y = 0;
+    int x =0;
             
     public Hexagon(Color color, Polygon polygon) {
         this.color = color;
@@ -21,8 +22,26 @@ public class Hexagon {
         shadowPolygon.translate(0, 60);
         double factorOscurecimiento = 0.5;
         shadowColor = darkenColor(color, factorOscurecimiento);
-
+        
     }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+    
+    
     
     public Color getColor() {
         return color;

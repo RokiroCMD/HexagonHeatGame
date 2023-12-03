@@ -13,6 +13,7 @@ import utils.PlayerState;
 public class PlayerManager {
 
     public static List<Player> players = new ArrayList<>();
+    public static List<Player> alive_players = new ArrayList<>();
     public List<Integer> keyStrokesJ1 = new ArrayList<>();
     public List<Integer> keyStrokesJ2 = new ArrayList<>();
     public List<Integer> keyStrokesJ3 = new ArrayList<>();
@@ -64,6 +65,11 @@ public class PlayerManager {
         }
     }
 
+    public void reset() {
+        players = new ArrayList<>();
+        alive_players = new ArrayList<>();
+    }
+
     public void keyPressed(Integer keyCode) {
 
         if (keyStrokesJ1.contains(keyCode)) {
@@ -88,25 +94,31 @@ public class PlayerManager {
             } else if (keyStrokesJ2.get(3).equals(keyCode)) {
                 players.get(1).rightKey = true;
             }
-        } else if (keyStrokesJ3.contains(keyCode)) {
-            if (keyStrokesJ3.get(0).equals(keyCode)) {
-                players.get(2).upKey = true;
-            } else if (keyStrokesJ3.get(1).equals(keyCode)) {
-                players.get(2).downKey = true;
-            } else if (keyStrokesJ3.get(2).equals(keyCode)) {
-                players.get(2).leftKey = true;
-            } else if (keyStrokesJ3.get(3).equals(keyCode)) {
-                players.get(2).rightKey = true;
+        }
+        if (gamePanel.numPlayers >= 3) {
+            if (keyStrokesJ3.contains(keyCode)) {
+                if (keyStrokesJ3.get(0).equals(keyCode)) {
+                    players.get(2).upKey = true;
+                } else if (keyStrokesJ3.get(1).equals(keyCode)) {
+                    players.get(2).downKey = true;
+                } else if (keyStrokesJ3.get(2).equals(keyCode)) {
+                    players.get(2).leftKey = true;
+                } else if (keyStrokesJ3.get(3).equals(keyCode)) {
+                    players.get(2).rightKey = true;
+                }
             }
-        } else if (keyStrokesJ4.contains(keyCode)) {
-            if (keyStrokesJ4.get(0).equals(keyCode)) {
-                players.get(3).upKey = true;
-            } else if (keyStrokesJ4.get(1).equals(keyCode)) {
-                players.get(3).downKey = true;
-            } else if (keyStrokesJ4.get(2).equals(keyCode)) {
-                players.get(3).leftKey = true;
-            } else if (keyStrokesJ4.get(3).equals(keyCode)) {
-                players.get(3).rightKey = true;
+            if (gamePanel.numPlayers >= 4) {
+                if (keyStrokesJ4.contains(keyCode)) {
+                    if (keyStrokesJ4.get(0).equals(keyCode)) {
+                        players.get(3).upKey = true;
+                    } else if (keyStrokesJ4.get(1).equals(keyCode)) {
+                        players.get(3).downKey = true;
+                    } else if (keyStrokesJ4.get(2).equals(keyCode)) {
+                        players.get(3).leftKey = true;
+                    } else if (keyStrokesJ4.get(3).equals(keyCode)) {
+                        players.get(3).rightKey = true;
+                    }
+                }
             }
         }
 
@@ -135,40 +147,53 @@ public class PlayerManager {
                 players.get(1).rightKey = false;
             }
 
-        } else if (keyStrokesJ3.contains(keyCode)) {
-            if (keyStrokesJ3.get(0).equals(keyCode)) {
-                players.get(2).upKey = false;
-            } else if (keyStrokesJ3.get(1).equals(keyCode)) {
-                players.get(2).downKey = false;
-            } else if (keyStrokesJ3.get(2).equals(keyCode)) {
-                players.get(2).leftKey = false;
-            } else if (keyStrokesJ3.get(3).equals(keyCode)) {
-                players.get(2).rightKey = false;
-            }
-
-        } else if (keyStrokesJ4.contains(keyCode)) {
-            if (keyStrokesJ4.get(0).equals(keyCode)) {
-                players.get(3).upKey = false;
-            } else if (keyStrokesJ4.get(1).equals(keyCode)) {
-                players.get(3).downKey = false;
-            } else if (keyStrokesJ4.get(2).equals(keyCode)) {
-                players.get(3).leftKey = false;
-            } else if (keyStrokesJ4.get(3).equals(keyCode)) {
-                players.get(3).rightKey = false;
-            }
-
         }
+        if (gamePanel.numPlayers >= 3) {
+            if (keyStrokesJ3.contains(keyCode)) {
+                if (keyStrokesJ3.get(0).equals(keyCode)) {
+                    players.get(2).upKey = false;
+                } else if (keyStrokesJ3.get(1).equals(keyCode)) {
+                    players.get(2).downKey = false;
+                } else if (keyStrokesJ3.get(2).equals(keyCode)) {
+                    players.get(2).leftKey = false;
+                } else if (keyStrokesJ3.get(3).equals(keyCode)) {
+                    players.get(2).rightKey = false;
+                }
+
+            }
+            if (gamePanel.numPlayers >= 4) {
+                if (keyStrokesJ4.contains(keyCode)) {
+                    if (keyStrokesJ4.get(0).equals(keyCode)) {
+                        players.get(3).upKey = false;
+                    } else if (keyStrokesJ4.get(1).equals(keyCode)) {
+                        players.get(3).downKey = false;
+                    } else if (keyStrokesJ4.get(2).equals(keyCode)) {
+                        players.get(3).leftKey = false;
+                    } else if (keyStrokesJ4.get(3).equals(keyCode)) {
+                        players.get(3).rightKey = false;
+                    }
+
+                }
+            }
+        }
+
     }
 
-    void addPlayer() {
-        if (players.size() < 4) {
+    public void addPlayer() {
+        if (players.size() < gamePanel.numPlayers) {
             int[] pos = gamePanel.hexagonManager.centerPositionHexagon(players.size());
-            if (players.size() == 3) {
-                pos = gamePanel.hexagonManager.centerPositionHexagon(players.size()+1);
+            if (players.size() == gamePanel.numPlayers - 1) {
+                pos = gamePanel.hexagonManager.centerPositionHexagon(players.size() + 1);
             }
             new Player(gamePanel, pos[0] - 32, pos[1] - 32);
         }
 
+    }
+
+    public void removeAlivePlayer(Player player) {
+        if (alive_players.contains(player)) {
+            alive_players.remove(player);
+        }
     }
 
     public int totalPlayers() {
